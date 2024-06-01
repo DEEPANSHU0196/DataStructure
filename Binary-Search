@@ -1,0 +1,30 @@
+#include<stdio.h>
+int main()
+{
+    int mid=0,x=6,lower=0,upper=7;
+    int A[]= {1,2,3,4,5,6,7,8};
+    while(lower<=upper)
+    {
+        mid = (lower+upper)/2;
+        if(A[mid]==x)
+        {
+            break;
+        }
+        else if(x<A[mid])
+        {
+            upper=mid-1;
+        }
+        else 
+        {
+            lower = mid+1;
+        }
+    }
+    if(lower>upper)
+    {
+        printf("Element not found");
+    }
+    else
+    {
+        printf("Element %d found at Index : %d",x,mid);
+    }
+}

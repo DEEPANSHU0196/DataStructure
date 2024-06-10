@@ -1,0 +1,170 @@
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;//info or data 
+    struct node* next;
+};
+struct node* start = NULL;
+struct node* last = NULL;
+
+void InsertAtEND(int data)
+{
+    struct node* new1 = (struct node*)malloc(sizeof(struct node));
+    new1->data = data;
+
+    if (start == NULL) {
+        last = new1;
+        start = new1;
+    } else {
+        last->next = new1;
+        last = new1;
+    }
+    last->next = NULL;
+}
+void InsertAtBEG(int data)
+{
+    struct node* new1 = (struct node*)malloc(sizeof(struct node));
+    new1->data = data;
+    if(start == NULL)
+    {
+        new1->next =NULL;
+        last = new1;
+        start = new1;
+    }
+    else
+    {
+        new1->next = start;
+        start = new1;
+    }
+}
+
+void InsertAtSpecificPosition(int data, int location) {
+    struct node* new1 = (struct node*)malloc(sizeof(struct node));
+    new1->data = data;
+    new1->next = NULL;
+
+    if (location == 1) {
+        new1->next = start;
+        start = new1;
+    } else {
+        struct node* previous = start;
+        int count = 1;
+
+        while (count < location - 1 && previous != NULL) {
+            previous = previous->next;
+            count++;
+        }
+
+            new1->next = previous->next;
+            previous->next = new1;
+        }
+}
+void DeleteAtEnd()
+{
+    if(start == NULL)
+    {
+        printf("UnderFlow");
+    }
+    else if(start->next ==NULL)
+    {
+        free(start);
+        start =NULL;
+    }
+    else 
+    {
+        struct node* current = start;
+        while(current->next!=last)
+        {
+            current=current->next;
+        }
+        current->next=NULL;
+        free(last);
+        last = current;
+    }
+}
+void DeleteAtBeg()
+{
+    struct node* new1 = (struct node*)malloc(sizeof(struct node));
+    if(start ==NULL)
+    {
+        printf("UnderFlow");
+    }
+    else 
+    {
+        struct node* current = start;
+        start = start->next;
+        current->next =NULL;
+        free(current);
+    }
+}
+void DeleteAtSpec(int location)
+{
+    struct node* current = start;  // pointer
+    struct node* previous =NULL;  // pointer 
+    
+    if(start ==0)
+    {
+        printf("Underflow");
+    }
+    else if(location ==1)
+    {
+        start = start->next;
+        current->next =NULL;
+        free(current);
+    }
+    else 
+    {
+        for(int i=0;i<location-1;i++)
+        {
+            previous = current;
+            current = current->next;
+        }
+        previous->next = current->next;
+        current->next =NULL;
+        free(current);
+    }
+}
+void Display()
+{
+    struct node* new1 = start;
+    while(new1 != NULL){
+        printf("%d -> ", new1->data);
+        new1 = new1->next;
+    }
+}
+int main()
+{
+    while(1){
+    printf("\nMenu\n");
+    printf("1.Insertion at End\n");
+    printf("2.Insertion at Beginning\n");
+    printf("3.Insertion at a specific position\n");
+    printf("4.Display\n");
+    printf("5.DeletionAtEnd\n");
+    printf("6.DeletionAtBeg\n");
+    printf("7.DeletionAtSpecificPosition\n");
+    int option;
+    scanf("%d",&option);
+    switch (option)
+    {
+        case 1:InsertAtEND(5);
+                printf("Case 1 run successfully");
+                   break;
+        case 2:InsertAtBEG(4);
+                   break;
+        case 3:InsertAtSpecificPosition(6,2);
+                   break;
+        case 4:Display();
+                break;
+        case 5:DeleteAtEnd();
+                break;
+        case 6:DeleteAtBeg();
+                break;
+        case 7:DeleteAtSpec(2);
+                break;
+        default :printf("Choose Coorect Case");
+    }
+    }
+    return 0;
+}

@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;//info or data 
+    struct node* next;
+};
+struct node* front  = NULL;
+struct node* rear = NULL;
+void InsertAtEND(int data)
+{
+    struct node* new1 = (struct node*)malloc(sizeof(struct node));
+    new1->data = data;
+
+    if (front == NULL) {
+        rear = new1;
+        front = new1;
+    } else {
+       rear->next = new1;
+       rear = new1;
+    }
+   rear->next = NULL;
+}
+void DeleteAtBeg()
+{
+    struct node* new1 = (struct node*)malloc(sizeof(struct node));
+    if(front ==NULL)
+    {
+        printf("UnderFlow");
+    }
+    else 
+    {
+        struct node* current = front ;
+        front = front->next;
+        current->next =NULL;
+        free(current);
+    }
+}
+void Display()
+{
+    struct node* new1 = front;
+    while(new1 != NULL){
+        printf("%d -> ", new1->data);
+        new1 = new1->next;
+    }
+}
+int main()
+{
+    while(1){
+    printf("\n*****Implementation of Queue*****\n");
+    printf("\n***Menu**\n");
+    printf("1.Insertion\n");
+    printf("2.Deletion\n");
+    printf("3.Display\n");
+    printf("4.Exit\n");
+    int option;
+    scanf("%d",&option);
+    switch (option)
+    {
+        case 1:printf("Enter the Value to be inserted");
+        int i;
+                scanf("%d",&i);
+            InsertAtEND(i);
+                break;
+        
+        case 2:DeleteAtBeg();
+                break;
+                
+        case 3:Display();
+                break;
+        case 4: printf("Program Over*_*");
+                exit(0);
+
+        default :printf("Choose Coorect Case");
+    }
+    }
+    return 0;
+}  
+

@@ -1,0 +1,76 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node* next;
+};
+struct node* top = NULL;
+
+
+void Insert(int info)
+{
+    struct node* new1 = (struct node*)malloc(sizeof(struct node));
+    new1->data = info ;
+    if(top ==NULL)
+    {
+        new1->next =NULL;
+        top = new1;
+    }
+    else 
+    {
+        new1->next =top;
+        top = new1;
+    }
+}
+
+void Delete() {
+    if (top == NULL) {
+        printf("Underflow\n");
+    } else {
+        struct node* current = top;
+        top = top->next;
+        current->next =NULL;
+        free(current);
+    }
+}
+
+void display()
+{
+    struct node* new1 = top;
+    while(new1 != NULL){
+        printf("%d -> ", new1->data);
+        new1 = new1->next;
+    }
+}
+int main()
+{
+     while(1){
+    printf("\nImplementation of Stack usning Linked List\n");
+    printf("\nMenu\n");
+    printf("1.Insertion\n");
+    printf("2.Deletion\n");
+    printf("3.Display\n");
+    printf("4.Exit\n");
+    int option;
+    scanf("%d",&option);
+    switch (option)
+    {
+        case 1: printf("Enter the Value to be inserted");
+                int i;
+                scanf("%d",&i);
+                Insert(i);
+                break;
+        case 2:Delete();
+                break;
+        case 3:  display();
+                break;
+        case 4:printf("Program Over*_*");
+                exit(0);
+        default : printf("Please choose correct case");
+    }
+    }
+    return 0;
+}
+
+

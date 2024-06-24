@@ -1,0 +1,35 @@
+//shell sorting code
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+    int i,n=11,j,gap,temp;
+    int a[n];
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    for(gap=n/2;gap>0;gap=gap/2)
+    {
+        printf("(gap=%d ",gap);
+        for(i=gap;i<n;i++)
+        {
+            printf("i=%d ",i);
+            temp =a[i];
+        
+        for(j=i;j>=gap && a[j-gap]>temp;j=j-gap)
+        {
+            printf("j=%d ",j);
+            a[j]=a[j-gap];
+        }
+        a[j]=temp;
+        printf("temp=%d )",temp);
+    }
+    }
+    for(i=0;i<n-1;i++)
+    {
+        printf("%d  ",a[i]);
+    }
+    
+    return 0;
+}
